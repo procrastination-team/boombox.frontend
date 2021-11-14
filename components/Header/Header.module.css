@@ -1,0 +1,12 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+    border-bottom: 2px solid var(--grey);
+}
+
+.accountIcon path {
+    fill: var(--grey);
+}
