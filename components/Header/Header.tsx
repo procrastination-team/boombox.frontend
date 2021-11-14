@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './Header.module.css';
 import cn from 'classnames';
-import { AccountIcon } from '../Icons/AccountIcon';
 import { BoomboxIcon } from '../Icons/BoomboxIcon';
+import { HeaderProfile } from './HeaderProfile/HeaderProfile';
 
 interface HeaderProps {
     mix?: string;
@@ -14,10 +14,10 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className={cn(styles.container, mix)}>
       <div>
-        <BoomboxIcon  />
+        <BoomboxIcon className={styles.boomboxIcon} />
       </div>
       <div>
-        <AccountIcon />
+        <HeaderProfile />
       </div>
     </header>
   );

@@ -1,5 +1,17 @@
 :root {
+    /**
+     * Colors
+     */
     --base: #c655ee;
     --purple: #c655ee;
     --grey: #b4b4b4;
+
+    /**
+     * Spaces
+     */
+    --space-3-xs: 2px;
+    --space-2-xs: 4px;
+    --space-xs: 8px;
+    --space-s: 12px;
+    --space-m: 16px;
 }
