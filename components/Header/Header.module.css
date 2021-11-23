@@ -1,0 +1,14 @@
+.container {
+    width: 100%;
+    line-height: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--space-s);
+    min-height: 50px;
+    border-bottom: 2px solid var(--grey);
+}
+
+.boomboxIcon {
+    width: 42px;
+}
