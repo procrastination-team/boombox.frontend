@@ -5,6 +5,7 @@
     --base: #c655ee;
     --purple: #c655ee;
     --grey: #b4b4b4;
+    --white: #fff;
 
     /**
      * Spaces
@@ -14,4 +15,16 @@
     --space-xs: 8px;
     --space-s: 12px;
     --space-m: 16px;
+    --space-l: 20px;
+
+    /**
+     * Width, height etc.
+     */
+    --border-radius-s: 4px;
+    --border-radius-m: 8px;
+
+    /**
+     * Transitions andd animations
+     */
+    --transition-base: 0.07s;
 }
