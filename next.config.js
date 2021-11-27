@@ -8,5 +8,8 @@ module.exports = {
     });
 
     return config;
+  },
+  env: {
+    SPOTIFY_DEVELOPER_CLIENT_ID: process.env.SPOTIFY_DEVELOPER_CLIENT_ID,
   }
 }

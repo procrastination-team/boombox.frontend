@@ -12,7 +12,26 @@
 }
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: var(--space-s);
+}
+
+.title {
+  font-size: var(--font-size-l);
+  font-weight: bold;
+}
+
+.crossIcon {
+  width: var(--space-m);
+  height: var(--space-m);
+  margin-right: var(--space-2-xs);
+  cursor: pointer;
+
+  & path {
+    fill: var(--dark-grey);
+  }
 }
 
 .container {
@@ -33,6 +52,10 @@
 .submitButton {
   padding: var(--space-xs) var(--space-2-xs);
   border: 2px solid var(--grey);
+  border-radius: var(--border-radius-s);
+  font-size: var(--space-m);
+  font-weight: bold;
+  color: var(--dark-grey);
   outline: none;
   border-radius: none;
   background: var(--white);
