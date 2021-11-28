@@ -14,7 +14,7 @@ interface AuthParams {
 }
 
 export const spotifyAuthorize = async ({ clientId }: AuthParams) => {
-  const scope = 'user-read-private user-read-email';
+  const scope = 'user-read-private user-read-email streaming user-read-playback-state user-modify-playback-state user-library-read user-library-modify';
   const defenseStateLength = 16;
 
   window.location.replace(`https://accounts.spotify.com/authorize?${qs.stringify({

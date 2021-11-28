@@ -44,7 +44,9 @@ export default async function handler(
 
       const { access_token, refresh_token } = data;
 
-      cookies.set('spotifyAccessToken', access_token);
+      cookies.set('spotifyAccessToken', access_token, {
+        httpOnly: false,
+      });
       cookies.set('spotifyRefreshToken', refresh_token);
 
       res.redirect('/');
