@@ -4,11 +4,11 @@ import styles from './Main.module.css';
 import { Search } from '../Search/Search';
 import { Card } from '../Card/Card';
 
-interface Props {
+interface MainProps {
   className?: string;
 }
 
-export const Main: React.FC<Props> = ({ className }) => {
+export const Main: React.FC<MainProps> = ({ className }) => {
   return (
     <main className={classNames(className, styles.main)}>
       <Search className={styles.search} />
