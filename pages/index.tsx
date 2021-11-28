@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Footer } from '../components/Footer/Footer';
 import { Header } from '../components/Header/Header';
 import styles from '../styles/Home.module.css';
+import { Main } from '../components/Main/Main';
 
 const Home: NextPage = () => {
   return (
@@ -15,9 +16,7 @@ const Home: NextPage = () => {
 
       <Header mix={styles.header} />
 
-      <main className={styles.main}>
-          Welcome to <a href="https://nextjs.org">Boombox</a>
-      </main>
+      <Main className={styles.main} />
 
       <Footer mix={styles.footer} />
     </div>

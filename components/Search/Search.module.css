@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  padding: 2px;
+  position: relative;
+  border: 1px solid var(--base);
+  border-radius: var(--space-s);
+}
+
+.input {
+  flex-grow: 1;
+  padding: var(--space-xs);
+  font-size: 16px;
+  outline: none;
+  border: none;
+  background: none;
+}
+
+.button {
+  padding: var(--space-xs) var(--space-xl);
+  color: var(--white);
+  background: var(--purple);
+  border: none;
+  border-radius: 9px;
+  font: inherit;
+}
