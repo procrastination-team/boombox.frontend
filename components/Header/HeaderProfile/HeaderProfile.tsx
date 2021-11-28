@@ -3,10 +3,13 @@ import { AccountIcon } from '../../Icons/AccountIcon';
 import { Spotify } from './Services/Spotify/Spotify';
 import styles from './HeaderProfile.module.css';
 import { YandexMusic } from './Services/YandexMusic/YandexMusic';
+import { useRootStore } from '../../../hooks/useRootStore';
 
 interface HeaderProfileProps {}
 
 export const HeaderProfile: React.FC<HeaderProfileProps> = () => {
+  const store = useRootStore();
+
   return (
     <div className={styles.container}>
       <YandexMusic />

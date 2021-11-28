@@ -2,8 +2,11 @@ import axios from 'axios';
 import qs from 'qs';
 
 const random = (length = 8) => {
-  return Math.random().toString(length + 2)
-    .slice(2, 2 + length);
+  const hexBase = 16;
+  const padding = 2;
+
+  return Math.random().toString(hexBase)
+    .slice(padding, padding + length);
 };
 
 interface AuthParams {
