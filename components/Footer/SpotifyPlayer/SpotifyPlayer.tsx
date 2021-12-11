@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Cookie from 'js-cookie';
 import { getSpotifyAccessTokenUsecase } from '../../../usecases/getSpotifyAccessTokenUsecase';
 import { backendSpotifyPlayTrack } from '../../../usecases/backend/spotifyPlayTrack';
+import { useRootStore } from '../../../hooks/useRootStore';
+import { spotifyPlayTrackUsecase } from '../../../usecases/spotifyPlayTrackUsecase';
 
 interface SpotifyPlayerProps {
 
@@ -78,10 +80,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
   const [isActive, setActive] = useState(false);
   const [currentTrack, setTrack] = useState({});
 
-  const playTrack = (spotifyUri: string, device_id: string = deviceId) => {
-    backendSpotifyPlayTrack(spotifyUri, device_id);
-  };
-
+  const store = useRootStore();
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -107,8 +106,9 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
 
         player.addListener('ready', ({ device_id }: { device_id: string }) => {
           console.log('Ready with Device ID', device_id);
+
           setDeviceId(device_id);
-          playTrack('spotify:track:1Hy3CoHThqF0NBSmkmeR21', device_id);
+          store.spotifyStore.setDeviceId(device_id);
         });
 
         player.addListener('not_ready', ({ device_id }: { device_id: string }) => {
