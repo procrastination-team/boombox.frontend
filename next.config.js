@@ -11,5 +11,6 @@ module.exports = {
   },
   env: {
     SPOTIFY_DEVELOPER_CLIENT_ID: process.env.SPOTIFY_DEVELOPER_CLIENT_ID,
+    API_URL: process.env.API_URL,
   }
 }

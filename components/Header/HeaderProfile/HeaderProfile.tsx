@@ -8,8 +8,6 @@ import { useRootStore } from '../../../hooks/useRootStore';
 interface HeaderProfileProps {}
 
 export const HeaderProfile: React.FC<HeaderProfileProps> = () => {
-  const store = useRootStore();
-
   return (
     <div className={styles.container}>
       <YandexMusic />

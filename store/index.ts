@@ -1,5 +1,6 @@
 import { SpotifyStore } from "./SpotifyStore"
 import { YandexMusicStore } from "./YandexMusicStore"
+import { makeObservable, observable, action } from "mobx";
 
 /**
  * Root store pattern
@@ -12,10 +13,15 @@ export class RootStore {
   constructor() {
     this.spotifyStore = new SpotifyStore(this);
     this.yandexMusicStore = new YandexMusicStore(this);
+
+    makeObservable(this, {
+      spotifyStore: observable,
+      yandexMusicStore: observable,
+    });
   }
 
   getAllTracks() {
-    const spotifyTracks = this.spotifyStore.getTracks();
+    const spotifyTracks = this.spotifyStore.tracks;
 
     return [...spotifyTracks];
   }

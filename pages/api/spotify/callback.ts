@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import qs from 'qs';
-import { spotifyGetAuthToken } from '../../../lib/spotify';
+import { spotifyGetAuthTokenUsecase } from '../../../usecases/spotifyGetAuthTokenUsecase';
 import Cookies from 'cookies';
 
 type Data = {
@@ -30,7 +30,7 @@ export default async function handler(
       }));
   } else {
     try {
-      const data = await spotifyGetAuthToken({
+      const data = await spotifyGetAuthTokenUsecase({
         code: String(code),
         clientId: process.env.SPOTIFY_DEVELOPER_CLIENT_ID,
         clientSecret: process.env.SPOTIFY_DEVELOPER_CLIENT_SECRET,

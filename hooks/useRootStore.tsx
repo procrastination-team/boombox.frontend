@@ -2,7 +2,7 @@ import React, { createContext, ReactNode, useContext } from "react";
 import { RootStore } from "../store";
 
 // holds a reference to the store (singleton)
-let store: RootStore;
+let store: RootStore = new RootStore();
 
 // create the context
 const StoreContext = createContext<RootStore | undefined>(undefined);
@@ -28,4 +28,8 @@ export const useRootStore = () => {
   }
 
   return context
+}
+
+export const getRootStore = () => {
+  return store ?? new RootStore();  
 }

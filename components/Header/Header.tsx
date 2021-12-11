@@ -3,7 +3,6 @@ import styles from './Header.module.css';
 import cn from 'classnames';
 import { BoomboxIcon } from '../Icons/BoomboxIcon';
 import { HeaderProfile } from './HeaderProfile/HeaderProfile';
-import { useRootStore } from '../../hooks/useRootStore';
 
 interface HeaderProps {
     mix?: string;

@@ -22,4 +22,5 @@
   border: none;
   border-radius: 9px;
   font: inherit;
+  cursor: pointer;
 }
