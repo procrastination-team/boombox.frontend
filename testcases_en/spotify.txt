@@ -1,0 +1,72 @@
+Log in to Spotify:
+1.  Precondition: the account is not authorized, the account is paid
+    Steps:
+      1. Go to the main product page
+      2. Click spotify icon (Should be unactive[grey])
+      3. In the spotify authorization window that appears, log in to your account with a subscription and give access to the application
+    Expected behavior:
+      There should be a transition to the main page of the product, an inscription about successful authorization will appear, and the spotify icon will become colored
+2.  Precondition: аккаунт авторизован, аккаунт с подпиской.
+    Steps:
+      1. Go to the main product page
+      2. Click on the spotify icon (Should be active[colored])
+    Expected behavior:
+      Nothing should happen
+3.  Precondition: the account is not authorized, the account is NOT paid.
+    Steps:
+      1. Go to the main product page
+      2. Click on the spotify icon (Should be unactive[grey])
+      3. In the spotify authorization window that appears, log in to your account without a subscription and give access to the application
+    Expected behavior:
+      ??? 
+      Consider the possibility of displaying a message about the absence of a subscription and logout from spotify
+
+Spotify player:
+1.  Precondition: spotify account is authorized, account is paid, no tracks have been played before
+    Steps:
+      1. Choose any track available from spotify on the website
+      2. Click Play/pause button
+      Expected behavior:
+        Music should start playing
+      2.1 Click Play/pause button
+      Expected behavior:
+        Music should pause
+      3. Click "Previus" button
+      Expected behavior:
+        The track should start playing from the beginning, there should be no switching of the track
+      4. Click "Next" button
+      Expected behavior:
+        The track should switch to the next recommended one
+
+2.  Precondition: spotify account is authorized, account is paid, до этого проигралось 2 трека
+    Steps:
+      1. Choose any track available from spotify on the website
+      2. Wait until the track plays for 15 seconds
+      3. Click "Previus" button
+      Expected behavior:
+        The track should start playing from the beginning, there should be no switching of the track
+      4. Click "Previus" button
+      Expected behavior:
+        The track will switch to the previous one
+      5. Select and start playing a new track
+      6. Fastly click  "Previus" button
+      Expected behavior:
+        The track will switch to the previous one
+
+Spotify find music:
+1.    Precondition: spotify account is authorized, account is paid
+      Steps:
+        1. Click on the Search input field
+        2. Enter the name of any track available on spotify
+        3. Click the "Search" button
+        Expected behavior:
+          Answers to search queries should appear in the cards below
+        4. Click on the track card
+        Expected behavior:
+          Track should be played
+        5. Enter the name of other track available on spotify
+        6. Click on the track card with the track
+        Expected behavior:
+          Track should be played
+      
+      
