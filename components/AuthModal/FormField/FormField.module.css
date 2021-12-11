@@ -1,0 +1,21 @@
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  border: 2px solid var(--grey);
+  border-radius: var(--border-radius-s);
+  width: 100%;
+  outline: none;
+  padding: var(--space-2-xs) var(--space-s);
+  transition: var(--transition-base);
+
+  &:focus {
+    border-color: var(--base);
+  }
+}
+
+.label {
+  width: 100%;
+}

@@ -4,7 +4,10 @@
      */
     --base: #c655ee;
     --purple: #c655ee;
+    --secondary: #414141;
     --grey: #b4b4b4;
+    --dark-grey: #686868;
+    --white: #fff;
 
     /**
      * Spaces
@@ -14,4 +17,21 @@
     --space-xs: 8px;
     --space-s: 12px;
     --space-m: 16px;
+    --space-l: 20px;
+    --space-xl: 24px;
+
+    /**
+     * Width, height etc.
+     */
+    --border-radius-s: 4px;
+    --border-radius-m: 8px;
+    --font-size-s: 13px;
+    --font-size-m: 15px;
+    --font-size-l: 18px;
+    --font-size-xl: 24px;
+
+    /**
+     * Transitions andd animations
+     */
+    --transition-base: 0.07s;
 }

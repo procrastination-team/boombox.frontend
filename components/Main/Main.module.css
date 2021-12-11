@@ -1,0 +1,14 @@
+.main {
+  padding: var(--space-xl) max(calc(50% - 500px), var(--space-xl));
+}
+
+.search {
+  margin-bottom: var(--space-xl);
+}
+
+.cards {
+  display: grid;
+  grid-gap: var(--space-xl);
+  align-content: start;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
