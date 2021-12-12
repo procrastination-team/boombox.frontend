@@ -2,7 +2,7 @@
   position: relative;
   display: grid;
   grid-gap: var(--space-s);
-  grid-template-areas: 'image image' 'name name' 'author timing';
+  grid-template-areas: "image image" "name name" "author timing";
   grid-template-columns: 1fr;
   padding: var(--space-s);
   border: 1px solid var(--base);
@@ -37,6 +37,9 @@
   grid-area: author;
   font-weight: normal;
   color: var(--secondary);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .extra {
@@ -50,7 +53,7 @@
   height: 0;
   padding-bottom: 25%;
   border-radius: 50%;
-  background: linear-gradient(#7F008A, #B901C9);
+  background: linear-gradient(#7f008a, #b901c9);
   opacity: 0;
   position: absolute;
   bottom: 0;

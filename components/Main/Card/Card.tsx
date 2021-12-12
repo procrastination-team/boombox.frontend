@@ -28,7 +28,10 @@ export const Card: React.FC<CardProps> = ({
         </div>
       </div>
       <h3 className={styles.title}>{title}</h3>
-      <h4 className={styles.subTitle}>{subTitle}</h4>
+      <h4 
+        className={styles.subTitle}
+        title={subTitle}
+      >{subTitle}</h4>
       <p className={styles.extra}>{extra}</p>
     </div>
   );

@@ -14,8 +14,8 @@ export const SkeletonCard: React.FC<SkeletonCardProps> = () => {
       <div className={styles.skeletonImageWrapper}>
         <Skeleton className={cn(styles.skeletonElement)} width={'100%'} height={'100%'} />
       </div>
-      <Skeleton className={styles.skeletonElement} width={'100%'} height={30} />
-      <Skeleton className={styles.skeletonElement} width={'100%'} height={10} count={2} />
+      <Skeleton className={styles.skeletonElement} width={'100%'} height={22} />
+      <Skeleton className={styles.skeletonElement} width={'100%'} height={10} />
     </div>
   );
 };
