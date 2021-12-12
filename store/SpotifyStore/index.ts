@@ -18,7 +18,6 @@ export class SpotifyStore {
   }
 
   setTracks(tracks: Track<MusicService.Spotify>[]) {
-    console.log('tracks', tracks);
     this.tracks = tracks;
   }
 

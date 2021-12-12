@@ -4,6 +4,10 @@
   position: relative;
   border: 1px solid var(--base);
   border-radius: var(--space-s);
+
+  &:focus-within {
+    border-color: var(--pink);
+  }
 }
 
 .input {
@@ -23,4 +27,8 @@
   border-radius: 9px;
   font: inherit;
   cursor: pointer;
+
+  &:hover {
+    background: var(--pink);
+  }
 }

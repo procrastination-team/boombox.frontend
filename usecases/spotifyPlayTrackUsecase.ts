@@ -1,5 +1,6 @@
 import { getRootStore } from "../hooks/useRootStore";
 import { backendSpotifyPlayTrack } from "./backend/spotifyPlayTrack";
+import { setTrackUsecase } from "./setTrackUsecase";
 
 /**
  * Play any spotify track by id

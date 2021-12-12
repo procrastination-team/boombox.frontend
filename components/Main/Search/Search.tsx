@@ -4,14 +4,20 @@ import styles from './Search.module.css';
 import { searchTrackUsecase } from '../../../usecases/searchTrackUsecase';
 
 interface SearchProps {
+  setIsLoading: (isLoading: boolean) => void;
   className?: string;
 }
 
-export const Search: React.FC<SearchProps> = ({ className }) => {
+export const Search: React.FC<SearchProps> = ({ 
+  setIsLoading,
+  className 
+}) => {
   const [searchString, setSearchString] = useState('');
 
-  const searchTrack = (): void => {
-    searchTrackUsecase(searchString);
+  const searchTrack = async (): Promise<void> => {
+    setIsLoading(true);
+    await searchTrackUsecase(searchString);
+    setIsLoading(false);
   };
 
   const keyDownFactory = (event: React.KeyboardEvent<HTMLInputElement>): void => {

@@ -11,14 +11,13 @@ interface CardProps {
   extra?: string;
 }
 
-export const Card: React.FC<CardProps> = ({ 
+export const Card: React.FC<CardProps> = ({
   imageSrc,
   title,
   subTitle,
   playTrack,
-  extra
+  extra,
 }) => {
-
   return (
     <div className={styles.card}>
       <div className={styles.imageWrapper} onClick={playTrack}>

@@ -47,7 +47,8 @@
 
 .playButton {
   width: 25%;
-  height: 25%;
+  height: 0;
+  padding-bottom: 25%;
   border-radius: 50%;
   background: linear-gradient(#7F008A, #B901C9);
   opacity: 0;
@@ -61,7 +62,7 @@
   transition: 0.1s;
 }
 
-.card:hover .playButton {
+.imageWrapper:hover .playButton {
   visibility: visible;
   bottom: var(--space-s);
   opacity: 0.8;
@@ -69,5 +70,6 @@
 
 .playIcon {
   width: 50%;
+  margin-top: 100%;
   padding-left: 10%;
 }

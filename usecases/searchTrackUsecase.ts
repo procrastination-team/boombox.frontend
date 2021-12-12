@@ -7,6 +7,8 @@ export enum MusicService {
   YandexMusic = 'yandex_music',
 }
 
+export type MusicServiceUnion = `${MusicService}`;
+
 interface Artist {
   name: string;
 }
@@ -27,6 +29,10 @@ export interface Track<Service> {
 
 export const searchTrackUsecase = async (query: string) => {
   const store = getRootStore();
+
+  if (!query) {
+    return;
+  }
 
   try {
     const tracks = await backendSearchTracks({

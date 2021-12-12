@@ -4,6 +4,8 @@ import { getSpotifyAccessTokenUsecase } from '../../../usecases/getSpotifyAccess
 import { backendSpotifyPlayTrack } from '../../../usecases/backend/spotifyPlayTrack';
 import { useRootStore } from '../../../hooks/useRootStore';
 import { spotifyPlayTrackUsecase } from '../../../usecases/spotifyPlayTrackUsecase';
+import { setTrackUsecase } from '../../../usecases/setTrackUsecase';
+import { Player } from '../Player/Player';
 
 interface SpotifyPlayerProps {
 
@@ -78,7 +80,6 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
   const [isPaused, setPaused] = useState(false);
   const [deviceId, setDeviceId] = useState('');
   const [isActive, setActive] = useState(false);
-  const [currentTrack, setTrack] = useState({});
 
   const store = useRootStore();
 
@@ -116,12 +117,11 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
         });
 
         player.addListener('player_state_changed', ((state: any) => {
-          // console.log('state', state);
+          console.log('state', state);
           if (!state) {
             return;
           }
 
-          setTrack(state.track_window.current_track);
           setPaused(state.paused);
 
           player.getCurrentState().then((state: any) => {
@@ -138,16 +138,14 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
 
   return (
     <div>
-      <span>{ isActive ? '' : 'Loading...'}</span>
-      <button onClick={() => {
-        player.previousTrack();
-      }}>prev</button>
-      <button onClick={() => {
-        player.togglePlay();
-      }}>{isPaused ? 'Play' : 'Pause'}</button>
-      <button onClick={() => {
-        player.nextTrack();
-      }}>next</button>
+      <Player 
+        isReady={isActive}
+        isPlaying={!isPaused}
+        setPlay={() => player.togglePlay()}
+        setPause={() => player.togglePlay()}
+        nextTrack={() => player.nextTrack()}
+        previousTrack={() => player.previousTrack()}
+      />
     </div>
   );
 };
