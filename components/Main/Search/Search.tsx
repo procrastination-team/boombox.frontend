@@ -8,9 +8,9 @@ interface SearchProps {
   className?: string;
 }
 
-export const Search: React.FC<SearchProps> = ({ 
+export const Search: React.FC<SearchProps> = ({
   setIsLoading,
-  className 
+  className,
 }) => {
   const [searchString, setSearchString] = useState('');
 

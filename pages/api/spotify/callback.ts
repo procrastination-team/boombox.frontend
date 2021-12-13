@@ -30,10 +30,13 @@ export default async function handler(
       }));
   } else {
     try {
+      const { host } = req.headers;
+
       const data = await spotifyGetAuthTokenUsecase({
         code: String(code),
         clientId: process.env.SPOTIFY_DEVELOPER_CLIENT_ID,
         clientSecret: process.env.SPOTIFY_DEVELOPER_CLIENT_SECRET,
+        host,
       });
 
       if (!data) {

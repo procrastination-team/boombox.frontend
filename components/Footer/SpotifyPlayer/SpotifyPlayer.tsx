@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Cookie from 'js-cookie';
-import { getSpotifyAccessTokenUsecase } from '../../../usecases/getSpotifyAccessTokenUsecase';
-import { backendSpotifyPlayTrack } from '../../../usecases/backend/spotifyPlayTrack';
 import { useRootStore } from '../../../hooks/useRootStore';
-import { spotifyPlayTrackUsecase } from '../../../usecases/spotifyPlayTrackUsecase';
-import { setTrackUsecase } from '../../../usecases/setTrackUsecase';
 import { Player } from '../Player/Player';
 
 interface SpotifyPlayerProps {
@@ -117,7 +113,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
         });
 
         player.addListener('player_state_changed', ((state: any) => {
-          console.log('state', state);
+          // console.log('state', state);
           if (!state) {
             return;
           }
@@ -137,15 +133,13 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
 
 
   return (
-    <div>
-      <Player 
-        isReady={isActive}
-        isPlaying={!isPaused}
-        setPlay={() => player.togglePlay()}
-        setPause={() => player.togglePlay()}
-        nextTrack={() => player.nextTrack()}
-        previousTrack={() => player.previousTrack()}
-      />
-    </div>
+    <Player
+      isReady={isActive}
+      isPlaying={!isPaused}
+      setPlay={() => player.togglePlay()}
+      setPause={() => player.togglePlay()}
+      nextTrack={() => player.nextTrack()}
+      previousTrack={() => player.previousTrack()}
+    />
   );
 };

@@ -1,6 +1,6 @@
 import { getRootStore } from "../hooks/useRootStore";
 import { backendSearchTracks } from "./backend/searchTracks"
-import { convertBackendTrackModel } from "./converters/inputConverters";
+import { convertBackendTrackModel } from "./converters/backendInputConverters";
 
 export enum MusicService {
   Spotify = 'spotify',

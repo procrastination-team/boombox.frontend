@@ -2,6 +2,10 @@ import { observer } from 'mobx-react';
 import React from 'react';
 import { useRootStore } from '../../../hooks/useRootStore';
 import styles from './Player.module.css';
+import { PlayerControls } from './PlayerControls/PlayerControls';
+import { ProgressBar } from './ProgressBar/ProgressBar';
+import { TrackAdditionalInformation } from './TrackAdditionalInformation/TrackAdditionalInformation';
+import { TrackMainInformation } from './TrackMainInformation/TrackMainInformation';
 
 interface PlayerProps {
   isReady?: boolean;
@@ -22,25 +26,19 @@ export const Player: React.FC<PlayerProps> = observer(({
 }) => {
   const store = useRootStore();
 
-  const ProgressBar: React.FC<unknown> = () => {
-    return (<></>);
-  }
-
   return (
     <div className={styles.conatiner}>
-      <div className={styles.progressBar}></div>
-      <div>
-        <img src="" alt="" />
-        <span>{isReady ? '' : 'Loading...'}</span>
-        <button onClick={() => {
-          previousTrack();
-        }}>prev</button>
-        <button onClick={() => {
-          isPlaying ? setPause() : setPlay();
-        }}>{isPlaying ? 'Pause' : 'Play'}</button>
-        <button onClick={() => {
-          nextTrack();
-        }}>next</button>
+      <ProgressBar />
+      <div className={styles.playerContent}>
+        <TrackMainInformation />
+        <PlayerControls
+          isPlaying={isPlaying}
+          setPlay={setPlay}
+          setPause={setPause}
+          nextTrack={nextTrack}
+          previousTrack={previousTrack}
+        />
+        <TrackAdditionalInformation />
       </div>
     </div>
   );

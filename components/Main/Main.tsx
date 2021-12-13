@@ -9,20 +9,11 @@ import { MusicService, MusicServiceUnion, Track } from '../../usecases/searchTra
 import { spotifyPlayTrackUsecase } from '../../usecases/spotifyPlayTrackUsecase';
 import { setTrackUsecase } from '../../usecases/setTrackUsecase';
 import { SkeletonCard } from './SkeletonCard/SkeletonCard';
+import { formatDuration } from '../../utils/time';
 
 interface MainProps {
   className?: string;
 }
-
-const MS_IN_SECOND = 1000;
-const SECOND_IN_MINUTE = 60;
-
-const formatDuration = (ms: number): string => {
-  const minutes = Math.floor(ms / MS_IN_SECOND / SECOND_IN_MINUTE);
-  const seconds = String(Math.floor(ms / MS_IN_SECOND % SECOND_IN_MINUTE)).padStart(2, '0');
-
-  return `${minutes}:${seconds}`;
-};
 
 export const Main: React.FC<MainProps> = observer(({ className }) => {
   const [isLoadincCards, setIsLoadingCards] = useState(false);
@@ -53,18 +44,18 @@ export const Main: React.FC<MainProps> = observer(({ className }) => {
       />
     ))
   );
-  
+
   const getSkeletonCards = (skeletonsQuantity: number) => (
     new Array(skeletonsQuantity).fill(<></>, 0, skeletonsQuantity)
-    .map((_, index) => (
-      <SkeletonCard key={`skeletonCard${index}`}/>
-    ))
-  )
+      .map((_, index) => (
+        <SkeletonCard key={`skeletonCard${index}`}/>
+      ))
+  );
 
   return (
     <main className={classNames(className, styles.main)}>
-      <Search 
-        className={styles.search} 
+      <Search
+        className={styles.search}
         setIsLoading={setIsLoadingCards}
       />
       <div className={styles.cards}>
