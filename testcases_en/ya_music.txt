@@ -61,12 +61,10 @@ Yandex Music find music:
         3. Click the "Search" button
         Expected behavior:
           Answers to search queries should appear in the cards below
-        4. Click on the track card
+        4. Click on the button "Play" on the track card
         Expected behavior:
-          Track should be played
+          Track should be played, playing track is same track as named on the track card
         5. Enter the name of other track available on Yandex Music
-        6. Click on the track card with the track
+        6. Click on the button "Play" on the track card
         Expected behavior:
-          Track should be played
-      
-      
+          Track should be played, playing track is same track as named on the track card
