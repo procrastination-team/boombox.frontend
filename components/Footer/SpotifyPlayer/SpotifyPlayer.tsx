@@ -74,7 +74,6 @@ interface WebPlaybackError {
 export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
   const [player, setPlayer] = useState<any>(undefined);
   const [isPaused, setPaused] = useState(false);
-  const [deviceId, setDeviceId] = useState('');
   const [isActive, setActive] = useState(false);
 
   const store = useRootStore();
@@ -104,7 +103,6 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
         player.addListener('ready', ({ device_id }: { device_id: string }) => {
           console.log('Ready with Device ID', device_id);
 
-          setDeviceId(device_id);
           store.spotifyStore.setDeviceId(device_id);
         });
 
@@ -130,23 +128,6 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
       };
     }
   }, []);
-
-  const getPlayerState = async (): Promise<WebPlaybackState | null> => {
-    if (!player) {
-      return null;
-    }
-
-    return player.getCurrentState();
-  }
-
-  // setInterval(() => {
-  //   const currentState = getPlayerState().then((state) => {
-  //     console.log('CUrrent state', state);
-  //     if (state?.position) {
-  //       setCurrentTrackPositionUsecase(state?.position);
-  //     }
-  //   })
-  // }, 1000);
 
   return (
     <Player

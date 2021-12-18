@@ -22,7 +22,6 @@ export const TrackMainInformation: React.FC<TrackMainInformationProps> = observe
           </div>
         </>
       )}
-
     </div>
   );
 });
