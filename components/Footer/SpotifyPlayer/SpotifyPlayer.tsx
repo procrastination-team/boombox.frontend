@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Cookie from 'js-cookie';
 import { useRootStore } from '../../../hooks/useRootStore';
 import { Player } from '../Player/Player';
+import { checkIsSpotifyAccessTokenValid } from '../../../usecases/checkIsSpotifyAccessTokenValid';
+import { getSpotifyAccessTokenUsecase } from '../../../usecases/getSpotifyAccessTokenUsecase';
+import axios from 'axios';
 
 interface SpotifyPlayerProps {
 
@@ -88,12 +90,16 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
 
     if (typeof window !== 'undefined') {
       window.onSpotifyWebPlaybackSDKReady = () => {
-        const accessToken = Cookie.get('spotifyAccessToken');
-
         const player = new window.Spotify.Player({
           name: 'Web Playback SDK',
-          getOAuthToken: (cb: any) => {
-            cb(accessToken);
+          getOAuthToken: async (cb: any) => {
+            const isTokenValid = checkIsSpotifyAccessTokenValid();
+
+            if (!isTokenValid) {
+              await axios.get('/api/spotify/refreshToken');
+            }
+
+            cb(getSpotifyAccessTokenUsecase());
           },
           volume: 0.5,
         });
@@ -111,7 +117,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
         });
 
         player.addListener('player_state_changed', ((state: any) => {
-          console.log('state', state);
+          // console.log('state', state);
   
           if (!state) {
             return;
