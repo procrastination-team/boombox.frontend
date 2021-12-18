@@ -29,7 +29,10 @@ export const Main: React.FC<MainProps> = observer(({ className }) => {
 
   const setTrackToPlay = (track: Track<MusicServiceUnion>): void => {
     spotifyPlayTrackUsecase(track.id);
-    setTrackUsecase(track);
+    setTrackUsecase({
+      ...track,
+      position: 0,
+    });
   };
 
   const getTrackCards = () => (

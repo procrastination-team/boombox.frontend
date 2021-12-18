@@ -1,3 +1,7 @@
 .icon {
     cursor: pointer;
 }
+
+.disabled {
+    filter: grayscale(100%);
+}

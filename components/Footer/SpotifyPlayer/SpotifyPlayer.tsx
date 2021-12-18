@@ -113,7 +113,8 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
         });
 
         player.addListener('player_state_changed', ((state: any) => {
-          // console.log('state', state);
+          console.log('state', state);
+  
           if (!state) {
             return;
           }
@@ -125,12 +126,27 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
           });
         }));
 
-
         player.connect();
       };
     }
   }, []);
 
+  const getPlayerState = async (): Promise<WebPlaybackState | null> => {
+    if (!player) {
+      return null;
+    }
+
+    return player.getCurrentState();
+  }
+
+  // setInterval(() => {
+  //   const currentState = getPlayerState().then((state) => {
+  //     console.log('CUrrent state', state);
+  //     if (state?.position) {
+  //       setCurrentTrackPositionUsecase(state?.position);
+  //     }
+  //   })
+  // }, 1000);
 
   return (
     <Player
@@ -140,6 +156,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
       setPause={() => player.togglePlay()}
       nextTrack={() => player.nextTrack()}
       previousTrack={() => player.previousTrack()}
+      setPosition={(ms: number) => player.seek(ms)}
     />
   );
 };

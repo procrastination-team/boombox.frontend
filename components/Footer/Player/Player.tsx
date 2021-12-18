@@ -14,6 +14,7 @@ interface PlayerProps {
   setPause: () => void;
   nextTrack: () => void;
   previousTrack: () => void;
+  setPosition: (ms: number) => void;
 }
 
 export const Player: React.FC<PlayerProps> = observer(({
@@ -23,12 +24,15 @@ export const Player: React.FC<PlayerProps> = observer(({
   setPause,
   nextTrack,
   previousTrack,
+  setPosition,
 }) => {
   const store = useRootStore();
 
   return (
     <div className={styles.conatiner}>
-      <ProgressBar />
+      <ProgressBar
+        setPosition={setPosition}
+      />
       <div className={styles.playerContent}>
         <TrackMainInformation />
         <PlayerControls

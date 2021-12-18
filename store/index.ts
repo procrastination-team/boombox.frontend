@@ -3,6 +3,10 @@ import { YandexMusicStore } from "./YandexMusicStore"
 import { makeObservable, observable, action } from "mobx";
 import { MusicService, MusicServiceUnion, Track } from "../usecases/searchTrackUsecase";
 
+export interface CurrentTrack extends Track<MusicServiceUnion> {
+  position: number;
+}
+
 /**
  * Root store pattern
  * https://dev.to/ivandotv/mobx-root-store-pattern-with-react-hooks-318d
@@ -10,7 +14,7 @@ import { MusicService, MusicServiceUnion, Track } from "../usecases/searchTrackU
 export class RootStore {
   spotifyStore: SpotifyStore;
   yandexMusicStore: YandexMusicStore;
-  currentTrack: Track<MusicServiceUnion> | null;
+  currentTrack: CurrentTrack | null;
 
   constructor() {
     this.spotifyStore = new SpotifyStore(this);
@@ -30,7 +34,7 @@ export class RootStore {
     return [...spotifyTracks];
   }
 
-  setCurrentTrack(track: Track<MusicServiceUnion>) {
+  setCurrentTrack(track: CurrentTrack) {
     this.currentTrack = track;
   }
 }

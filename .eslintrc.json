@@ -1,7 +1,7 @@
 {
   "extends": [
-    "next/core-web-vitals",
-    "codex/ts"
+    "next/core-web-vitals"
+    // "codex/ts"
   ],
   "plugins": [
     "react"

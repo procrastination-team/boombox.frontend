@@ -3,3 +3,7 @@
     cursor: pointer;
     height: auto;
 }
+
+.disabled {
+    filter: grayscale(100%);
+}

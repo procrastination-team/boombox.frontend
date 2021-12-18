@@ -2,8 +2,15 @@ import { getRootStore } from "../hooks/useRootStore"
 import { CurrentTrack } from "../store";
 import { MusicService, MusicServiceUnion, Track } from "./searchTrackUsecase";
 
-export const setTrackUsecase = (track: CurrentTrack) => {
+export const setCurrentTrackPositionUsecase = (position: number) => {
   const store = getRootStore();
 
-  store.setCurrentTrack(track);
+  if (!store.currentTrack) {
+    return;
+  }
+
+  store.setCurrentTrack({
+    ...store.currentTrack,
+    position,
+  });
 }

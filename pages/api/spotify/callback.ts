@@ -7,9 +7,7 @@ type Data = {
   name: string
 };
 
-enum ResponseStatus {
-  OK = 200
-}
+const MS_IN_SECOND = 1000;
 
 /**
  * @param req - api request
@@ -45,9 +43,12 @@ export default async function handler(
         return;
       }
 
-      const { access_token, refresh_token } = data;
+      const { access_token, refresh_token, expires_in } = data;
 
       cookies.set('spotifyAccessToken', access_token, {
+        httpOnly: false,
+      });
+      cookies.set('spotifyAccessTokenExpiresAt', String(new Date().valueOf() + expires_in * MS_IN_SECOND), {
         httpOnly: false,
       });
       cookies.set('spotifyRefreshToken', refresh_token);
