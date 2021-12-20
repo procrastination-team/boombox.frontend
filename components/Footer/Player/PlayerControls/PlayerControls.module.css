@@ -1,0 +1,35 @@
+.mainControls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: var(--space-xxxl);
+}
+
+.control {
+  width: 40px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+
+  & :hover {
+    fill: var(--base);
+  }
+}
+
+.previousTrackIcon,
+.nextTrackIcon,
+.pauseIcon,
+.playIcon {
+  fill: var(--grey);
+  width: 30px;
+}
+
+.nextTrackIcon {
+  transform: rotate(180deg);
+}
+
+.pauseIcon, .playIcon {
+  height: 70px;
+}

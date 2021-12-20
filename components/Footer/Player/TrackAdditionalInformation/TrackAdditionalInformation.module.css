@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  padding-right: var(--space-l);  
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-s);
+}

@@ -1,0 +1,67 @@
+.progressBar {
+  position: absolute;
+  top: -4px;
+  height: 4px;
+  width: 100%;
+  background: var(--light-grey);
+  cursor: pointer;
+}
+
+.currentProgress {
+  position: absolute;
+  top: -5px;
+
+  & :global(.rc-slider-rail) {
+    background-color: var(--light-grey);
+  }
+
+  & :global(.rc-slider-track) {
+    background-color: var(--base);
+  }
+
+  & :global(.rc-slider-handle) {
+    border: solid 2px var(--base);
+    background-color: var(--base);
+    width: 24px;
+    height: 24px;
+    margin-top: -10px;
+    cursor: pointer;
+    cursor: -webkit-grab;
+
+    &:hover {
+      border-color: var(--base);
+    }
+
+    &:active {
+      border-color: var(--base);
+      box-shadow: 0 0 5px var(--base);
+    }
+  }
+
+  & :global(.rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging) {
+    border-color: var(--base);
+    box-shadow: 0 0 0 5px var(--base);
+  }
+
+  & :global(.rc-slider-handle-click-focused:focus) {
+    border-color: var(--base);
+  }
+}
+/*
+// .progressCircle {
+//   background: var(--base);
+//   position: absolute;
+//   top: 2.5px;
+//   right: 0;
+//   width: 20px;
+//   height: 20px;
+//   border-radius: 50%;
+//   transform: translate(50%, -50%);
+//   transition: ease-in-out 0.1s;
+
+//   &:hover {
+//     width: 25px;
+//     height: 25px;
+//   }
+// }
+*/

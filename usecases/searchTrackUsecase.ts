@@ -1,8 +1,38 @@
 import { getRootStore } from "../hooks/useRootStore";
-import { backendSearchTracks, MusicService } from "./backend/searchTracks"
+import { backendSearchTracks } from "./backend/searchTracks"
+import { convertBackendTrackModel } from "./converters/backendInputConverters";
+
+export enum MusicService {
+  Spotify = 'spotify',
+  YandexMusic = 'yandex_music',
+}
+
+export type MusicServiceUnion = `${MusicService}`;
+
+interface Artist {
+  name: string;
+}
+
+export interface Track<Service> {
+  id: string;
+  service: Service;
+  name: string;
+  artists: Artist[];
+  imageUrl: string;
+
+  /**
+   * Duration in milliseconds
+   */
+  duration: number;
+}
+
 
 export const searchTrackUsecase = async (query: string) => {
   const store = getRootStore();
+
+  if (!query) {
+    return;
+  }
 
   try {
     const tracks = await backendSearchTracks({
@@ -15,7 +45,9 @@ export const searchTrackUsecase = async (query: string) => {
       return;
     }
 
-    store.spotifyStore.setTracks(tracks);
+    const convertedTracks = convertBackendTrackModel(tracks);
+
+    store.spotifyStore.setTracks(convertedTracks);
   } catch (error) {
     console.log('backendSearchTracks: ', error);
   }

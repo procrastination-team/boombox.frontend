@@ -1,22 +1,22 @@
 import axios from "axios";
 import qs from 'qs';
 import { getSpotifyAccessTokenUsecase } from "../getSpotifyAccessTokenUsecase";
+import { MusicService, Track } from "../searchTrackUsecase";
 
 const apiUrl = process.env.API_URL;
 
-export enum MusicService {
-  Spotify = 'spotify',
-  YandexMusic = 'yandex_music',
+interface BackendSearchTracksParams {
+  service: MusicService;
+  query: string;
 }
 
-interface Artist {
+export interface BackendTrackModel {
+  id: string;
+  service: MusicService;
   name: string;
-}
-
-export interface Track<Service> {
-  service: Service;
-  name: string;
-  artists: Artist[];
+  artists: {
+    name: string;
+  }[];
   image_url: string;
 
   /**
@@ -25,16 +25,10 @@ export interface Track<Service> {
   duration: number;
 }
 
-
-interface BackendSearchTracks {
-  service: MusicService;
-  query: string;
-}
-
 export const backendSearchTracks = async ({
   service,
   query,
-}: BackendSearchTracks): Promise<Track<MusicService.Spotify>[] | null> => {
+}: BackendSearchTracksParams): Promise<BackendTrackModel[] | null> => {
   const response = await axios.get(`${apiUrl}/api/v1/${service}/search?q=${query}`, {
     headers: {
       Authorization: `Bearer ${getSpotifyAccessTokenUsecase()}`,

@@ -4,7 +4,9 @@
      */
     --base: #c655ee;
     --purple: #c655ee;
+    --pink: #f057bc;
     --secondary: #414141;
+    --light-grey: #ebebeb;
     --grey: #b4b4b4;
     --dark-grey: #686868;
     --white: #fff;
@@ -19,6 +21,8 @@
     --space-m: 16px;
     --space-l: 20px;
     --space-xl: 24px;
+    --space-xxl: 28px;
+    --space-xxxl: 32px;
 
     /**
      * Width, height etc.
@@ -29,6 +33,9 @@
     --font-size-m: 15px;
     --font-size-l: 18px;
     --font-size-xl: 24px;
+    --line-height-s: 15px;
+    --line-height-m: 17px;
+    --line-height-l: 20px;
 
     /**
      * Transitions andd animations

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Cookie from 'js-cookie';
+import { useRootStore } from '../../../hooks/useRootStore';
+import { Player } from '../Player/Player';
+import { checkIsSpotifyAccessTokenValid } from '../../../usecases/checkIsSpotifyAccessTokenValid';
 import { getSpotifyAccessTokenUsecase } from '../../../usecases/getSpotifyAccessTokenUsecase';
-import { backendSpotifyPlayTrack } from '../../../usecases/backend/spotifyPlayTrack';
+import axios from 'axios';
 
 interface SpotifyPlayerProps {
 
@@ -74,14 +76,9 @@ interface WebPlaybackError {
 export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
   const [player, setPlayer] = useState<any>(undefined);
   const [isPaused, setPaused] = useState(false);
-  const [deviceId, setDeviceId] = useState('');
   const [isActive, setActive] = useState(false);
-  const [currentTrack, setTrack] = useState({});
 
-  const playTrack = (spotifyUri: string, device_id: string = deviceId) => {
-    backendSpotifyPlayTrack(spotifyUri, device_id);
-  };
-
+  const store = useRootStore();
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -93,12 +90,16 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
 
     if (typeof window !== 'undefined') {
       window.onSpotifyWebPlaybackSDKReady = () => {
-        const accessToken = Cookie.get('spotifyAccessToken');
-
         const player = new window.Spotify.Player({
           name: 'Web Playback SDK',
-          getOAuthToken: (cb: any) => {
-            cb(accessToken);
+          getOAuthToken: async (cb: any) => {
+            const isTokenValid = checkIsSpotifyAccessTokenValid();
+
+            if (!isTokenValid) {
+              await axios.get('/api/spotify/refreshToken');
+            }
+
+            cb(getSpotifyAccessTokenUsecase());
           },
           volume: 0.5,
         });
@@ -107,8 +108,8 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
 
         player.addListener('ready', ({ device_id }: { device_id: string }) => {
           console.log('Ready with Device ID', device_id);
-          setDeviceId(device_id);
-          playTrack('spotify:track:1Hy3CoHThqF0NBSmkmeR21', device_id);
+
+          store.spotifyStore.setDeviceId(device_id);
         });
 
         player.addListener('not_ready', ({ device_id }: { device_id: string }) => {
@@ -117,11 +118,11 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
 
         player.addListener('player_state_changed', ((state: any) => {
           // console.log('state', state);
+  
           if (!state) {
             return;
           }
 
-          setTrack(state.track_window.current_track);
           setPaused(state.paused);
 
           player.getCurrentState().then((state: any) => {
@@ -129,25 +130,20 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
           });
         }));
 
-
         player.connect();
       };
     }
   }, []);
 
-
   return (
-    <div>
-      <span>{ isActive ? '' : 'Loading...'}</span>
-      <button onClick={() => {
-        player.previousTrack();
-      }}>prev</button>
-      <button onClick={() => {
-        player.togglePlay();
-      }}>{isPaused ? 'Play' : 'Pause'}</button>
-      <button onClick={() => {
-        player.nextTrack();
-      }}>next</button>
-    </div>
+    <Player
+      isReady={isActive}
+      isPlaying={!isPaused}
+      setPlay={() => player.togglePlay()}
+      setPause={() => player.togglePlay()}
+      nextTrack={() => player.nextTrack()}
+      previousTrack={() => player.previousTrack()}
+      setPosition={(ms: number) => player.seek(ms)}
+    />
   );
 };

@@ -1,0 +1,37 @@
+.container {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+}
+
+.trackImage {
+  height: 100%;
+}
+
+.trackInfo {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: var(--space-s);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-s);
+  overflow: hidden;
+}
+
+.trackName {
+  font-size: var(--font-size-l);
+  line-height: var(--line-height-l);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.trackArtists {
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  color: var(--dark-grey);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
