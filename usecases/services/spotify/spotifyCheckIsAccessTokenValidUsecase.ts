@@ -1,8 +1,8 @@
 import Cookies from "js-cookie";
-import { getSpotifyAccessTokenUsecase } from "./getSpotifyAccessTokenUsecase"
+import { spotifyGetAccessTokenUsecase } from "./spotifyGetAccessTokenUsecase"
 
-export const checkIsSpotifyAccessTokenValid = () => {
-  const accessToken = getSpotifyAccessTokenUsecase();
+export const spotifyCheckIsAccessTokenValidUsecase = () => {
+  const accessToken = spotifyGetAccessTokenUsecase();
   const tokenExpiresAt = Cookies.get('spotifyAccessTokenExpiresAt');
 
   if (!accessToken || !tokenExpiresAt) {

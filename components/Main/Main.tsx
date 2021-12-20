@@ -6,7 +6,7 @@ import { Card } from './Card/Card';
 import { useRootStore } from '../../hooks/useRootStore';
 import { observer } from 'mobx-react';
 import { MusicService, MusicServiceUnion, Track } from '../../usecases/searchTrackUsecase';
-import { spotifyPlayTrackUsecase } from '../../usecases/spotifyPlayTrackUsecase';
+import { spotifyPlayTrackUsecase } from '../../usecases/services/spotify/spotifyPlayTrackUsecase';
 import { setTrackUsecase } from '../../usecases/setTrackUsecase';
 import { SkeletonCard } from './SkeletonCard/SkeletonCard';
 import { formatDuration } from '../../utils/time';

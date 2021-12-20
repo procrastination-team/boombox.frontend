@@ -1,6 +1,6 @@
 import axios from "axios";
 import qs from 'qs';
-import { getSpotifyAccessTokenUsecase } from "../getSpotifyAccessTokenUsecase";
+import { spotifyGetAccessTokenUsecase } from "../services/spotify/spotifyGetAccessTokenUsecase";
 import { MusicService, Track } from "../searchTrackUsecase";
 
 const apiUrl = process.env.API_URL;
@@ -31,7 +31,7 @@ export const backendSearchTracks = async ({
 }: BackendSearchTracksParams): Promise<BackendTrackModel[] | null> => {
   const response = await axios.get(`${apiUrl}/api/v1/${service}/search?q=${query}`, {
     headers: {
-      Authorization: `Bearer ${getSpotifyAccessTokenUsecase()}`,
+      Authorization: `Bearer ${spotifyGetAccessTokenUsecase()}`,
     },
   });
 

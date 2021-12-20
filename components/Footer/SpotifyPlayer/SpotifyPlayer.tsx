@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useRootStore } from '../../../hooks/useRootStore';
 import { Player } from '../Player/Player';
-import { checkIsSpotifyAccessTokenValid } from '../../../usecases/checkIsSpotifyAccessTokenValid';
-import { getSpotifyAccessTokenUsecase } from '../../../usecases/getSpotifyAccessTokenUsecase';
+import { spotifyCheckIsAccessTokenValidUsecase } from '../../../usecases/services/spotify/spotifyCheckIsAccessTokenValidUsecase';
+import { spotifyGetAccessTokenUsecase } from '../../../usecases/services/spotify/spotifyGetAccessTokenUsecase';
 import axios from 'axios';
 
 interface SpotifyPlayerProps {
@@ -93,13 +93,13 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
         const player = new window.Spotify.Player({
           name: 'Web Playback SDK',
           getOAuthToken: async (cb: any) => {
-            const isTokenValid = checkIsSpotifyAccessTokenValid();
+            const isTokenValid = spotifyCheckIsAccessTokenValidUsecase();
 
             if (!isTokenValid) {
               await axios.get('/api/spotify/refreshToken');
             }
 
-            cb(getSpotifyAccessTokenUsecase());
+            cb(spotifyGetAccessTokenUsecase());
           },
           volume: 0.5,
         });

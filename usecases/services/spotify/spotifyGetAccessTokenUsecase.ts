@@ -1,5 +1,5 @@
 import Cookie from "js-cookie"
 
-export const getSpotifyAccessTokenUsecase = () => {
+export const spotifyGetAccessTokenUsecase = () => {
   return Cookie.get('spotifyAccessToken');
 }

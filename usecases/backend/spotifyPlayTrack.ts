@@ -1,4 +1,4 @@
-import { getSpotifyAccessTokenUsecase } from "../getSpotifyAccessTokenUsecase";
+import { spotifyGetAccessTokenUsecase } from "../services/spotify/spotifyGetAccessTokenUsecase";
 
 export const backendSpotifyPlayTrack = (spotifyUri: string, deviceId: string) => {
   if (!deviceId) {
@@ -10,7 +10,7 @@ export const backendSpotifyPlayTrack = (spotifyUri: string, deviceId: string) =>
     body: JSON.stringify({ uris: [ spotifyUri ] }),
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${getSpotifyAccessTokenUsecase()}`,
+      'Authorization': `Bearer ${spotifyGetAccessTokenUsecase()}`,
     },
   });
 };
