@@ -92,14 +92,10 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
       const isTokenValid = spotifyCheckIsAccessTokenValidUsecase();
 
       if (!isTokenValid) {
-        axios.get('/api/spotify/refreshToken').then(() => {
-          console.log('refreshed');
-
-          cb(getAccessTokenByServiceUsecase(MusicService.Spotify))
-        }).catch(() => {
-          console.log('Couldn\'t refresh spotify token');  
-        });
+        await axios.get('/api/spotify/refreshToken');
       }
+
+      cb(getAccessTokenByServiceUsecase(MusicService.Spotify))
     };
 
     if (typeof window !== 'undefined') {
