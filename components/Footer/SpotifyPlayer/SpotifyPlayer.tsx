@@ -5,6 +5,7 @@ import { spotifyCheckIsAccessTokenValidUsecase } from '../../../usecases/service
 import axios from 'axios';
 import { getAccessTokenByServiceUsecase } from '../../../usecases/getAccessTokenByServiceUsecase';
 import { MusicService } from '../../../store/models';
+import { setCurrentTrackPositionUsecase } from '../../../usecases/setCurrentTrackPositionUsecase';
 
 interface SpotifyPlayerProps {
 
@@ -15,6 +16,12 @@ declare global {
     onSpotifyWebPlaybackSDKReady: () => void;
     Spotify: any;
   }
+}
+
+export interface TrackState {
+  position: number;
+  duration: number;
+  timestamp: number;
 }
 
 interface WebPlaybackTrack {
@@ -77,6 +84,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
   const [player, setPlayer] = useState<any>(undefined);
   const [isPaused, setPaused] = useState(false);
   const [isActive, setActive] = useState(false);
+  const [trackState, setTrackState] = useState<TrackState>();
 
   const store = useRootStore();
 
@@ -126,6 +134,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
           }
 
           setPaused(state.paused);
+          setTrackState(state);
 
           player.getCurrentState().then((state: any) => {
             (!state) ? setActive(false) : setActive(true);
@@ -136,6 +145,23 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
       };
     }
   }, []);
+
+  useEffect(() => {
+    if (!trackState) {
+      return;
+    }
+
+    const interval = setInterval(
+      () =>
+        !isPaused &&
+        setCurrentTrackPositionUsecase(
+          trackState.position + +new Date() - trackState?.timestamp
+        ),
+      1000
+    );
+
+    return () => clearInterval(interval);
+  }, [isPaused, trackState]);
 
   return (
     <Player
