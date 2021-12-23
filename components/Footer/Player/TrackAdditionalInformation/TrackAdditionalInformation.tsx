@@ -6,15 +6,19 @@ import styles from './TrackAdditionalInformation.module.css';
 
 interface TrackAdditionalInformationProps {}
 
-export const TrackAdditionalInformation: React.FC<TrackAdditionalInformationProps> = observer(() => {
-  const store = useRootStore();
-  const { currentTrack } = store;
+export const TrackAdditionalInformation: React.FC<TrackAdditionalInformationProps> =
+  observer(() => {
+    const store = useRootStore();
+    const { currentTrack } = store;
 
-  return (
-    <div className={styles.container}>
-      { currentTrack && (
-        <span>{formatDuration(currentTrack.duration)}</span>
-      )}
-    </div>
-  );
-});
+    return (
+      <div className={styles.container}>
+        {currentTrack && (
+          <span>
+            {formatDuration(currentTrack.position)} /{' '}
+            {formatDuration(currentTrack.duration)}
+          </span>
+        )}
+      </div>
+    );
+  });
