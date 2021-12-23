@@ -25,9 +25,9 @@ const YandexMusicCallback: React.FC<unknown> = () => {
     Cookies.set('yandexMusicAccessTokenExpiresAt', tokenExpiredAt, {
       httpOnly: false,
     });
-  }
 
-  window.location.replace('/');
+    window.location.replace('/');
+  }
 
   return (<div>Good access token</div>);
 }

@@ -27,6 +27,7 @@
     /**
      * Width, height etc.
      */
+    --vh: 1vh;
     --border-radius-s: 4px;
     --border-radius-m: 8px;
     --font-size-s: 13px;

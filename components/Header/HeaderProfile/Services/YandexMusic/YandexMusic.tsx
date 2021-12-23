@@ -16,7 +16,7 @@ export const YandexMusic: React.FC<YandexMusicProps> = ({
       clientId: process.env.YANDEX_MUSIC_DEVELOPER_CLIENT_ID,
       host: window.location.host,
     })}>
-      <YandexMusicIcon className={cn(styles.icon, disabled && styles.disabled)} />
+      <YandexMusicIcon className={cn(styles.icon, disabled ? styles.disabled : '')} />
     </div>
   );
 };

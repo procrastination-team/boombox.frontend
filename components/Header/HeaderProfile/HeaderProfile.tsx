@@ -5,20 +5,21 @@ import styles from './HeaderProfile.module.css';
 import { YandexMusic } from './Services/YandexMusic/YandexMusic';
 import { spotifyCheckIsAccessTokenValidUsecase } from '../../../usecases/services/spotify/spotifyCheckIsAccessTokenValidUsecase';
 import { yandexMusicIsAccessTokenValidUsecase } from '../../../usecases/services/yandexMusic/yandexMusicIsAccessTokenValidUsecase';
+import { getActiveServicesUsecase } from '../../../usecases/getActiveServicesUsecase';
+import { MusicService } from '../../../store/models';
 
 interface HeaderProfileProps {}
 
 export const HeaderProfile: React.FC<HeaderProfileProps> = () => {
-  const [isSpotifyActive, setIsSoptifyActive] = useState(false);
+  const [isSpotifyActive, setIsSpotifyACtive] = useState(false);
   const [isYandexMusicActive, setIsYandexMusicActive] = useState(false);
 
   useEffect(() => {
-    const isSpotifyTokenValid = spotifyCheckIsAccessTokenValidUsecase();
-    const isYandexMusicTokenValid = yandexMusicIsAccessTokenValidUsecase();
+    const activeServices = getActiveServicesUsecase();
 
-    setIsSoptifyActive(isSpotifyTokenValid);
-    setIsYandexMusicActive(isYandexMusicTokenValid);
-  }, []);
+    setIsSpotifyACtive(activeServices.includes(MusicService.Spotify));
+    setIsYandexMusicActive(activeServices.includes(MusicService.YandexMusic));
+  }, [])
 
   return (
     <div className={styles.container}>

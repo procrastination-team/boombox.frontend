@@ -1,7 +1,7 @@
 .container {
   padding: 0;
   display: grid;
-  height: 100vh;
+  height: calc(var(--vh) * 100);
   grid-template-rows: 0.2fr 2.6fr 0.2fr; 
   grid-template-areas: 
   'head head'

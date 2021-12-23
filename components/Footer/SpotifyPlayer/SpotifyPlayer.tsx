@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useRootStore } from '../../../hooks/useRootStore';
 import { Player } from '../Player/Player';
 import { spotifyCheckIsAccessTokenValidUsecase } from '../../../usecases/services/spotify/spotifyCheckIsAccessTokenValidUsecase';
-import { spotifyGetAccessTokenUsecase } from '../../../usecases/services/spotify/spotifyGetAccessTokenUsecase';
 import axios from 'axios';
+import { getAccessTokenByServiceUsecase } from '../../../usecases/getAccessTokenByServiceUsecase';
+import { MusicService } from '../../../store/models';
 
 interface SpotifyPlayerProps {
 
@@ -72,7 +73,6 @@ interface WebPlaybackError {
   message: string;
 }
 
-
 export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
   const [player, setPlayer] = useState<any>(undefined);
   const [isPaused, setPaused] = useState(false);
@@ -88,19 +88,25 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
 
     document.body.appendChild(script);
 
+    const getOAuthToken = async (cb: any) => {
+      const isTokenValid = spotifyCheckIsAccessTokenValidUsecase();
+
+      if (!isTokenValid) {
+        axios.get('/api/spotify/refreshToken').then(() => {
+          console.log('refreshed');
+
+          cb(getAccessTokenByServiceUsecase(MusicService.Spotify))
+        }).catch(() => {
+          console.log('Couldn\'t refresh spotify token');  
+        });
+      }
+    };
+
     if (typeof window !== 'undefined') {
       window.onSpotifyWebPlaybackSDKReady = () => {
         const player = new window.Spotify.Player({
           name: 'Web Playback SDK',
-          getOAuthToken: async (cb: any) => {
-            const isTokenValid = spotifyCheckIsAccessTokenValidUsecase();
-
-            if (!isTokenValid) {
-              await axios.get('/api/spotify/refreshToken');
-            }
-
-            cb(spotifyGetAccessTokenUsecase());
-          },
+          getOAuthToken: getOAuthToken,
           volume: 0.5,
         });
 
