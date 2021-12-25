@@ -18,12 +18,6 @@ declare global {
   }
 }
 
-export interface TrackState {
-  position: number;
-  duration: number;
-  timestamp: number;
-}
-
 interface WebPlaybackTrack {
   uri: string; // Spotify URI spotify:track:xxxx
   id: string | null;                // Spotify ID from URI (can be null)
@@ -66,6 +60,8 @@ interface WebPlaybackState {
   },
   paused: boolean;  // Whether the current track is paused.
   position: number;    // The position_ms of the current track.
+  duration: number;
+  timestamp: number;
   repeat_mode: number; // The repeat mode. No repeat mode is 0,
   // repeat context is 1 and repeat track is 2.
   shuffle: false; // True if shuffled, false otherwise.
@@ -84,7 +80,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
   const [player, setPlayer] = useState<any>(undefined);
   const [isPaused, setPaused] = useState(false);
   const [isActive, setActive] = useState(false);
-  const [trackState, setTrackState] = useState<TrackState>();
+  const [trackState, setTrackState] = useState<WebPlaybackState>();
 
   const store = useRootStore();
 
@@ -151,14 +147,17 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
       return;
     }
 
-    const interval = setInterval(
-      () =>
-        !isPaused &&
-        setCurrentTrackPositionUsecase(
-          trackState.position + +new Date() - trackState?.timestamp
-        ),
-      1000
-    );
+    const interval = setInterval(() => {
+      if (isPaused) {
+        return;
+      }
+
+      const { timestamp, position: lastStateChangePosition } = trackState;
+      const diffAfterLastStateChange = new Date().valueOf() - timestamp;
+      const newTrackPosition = lastStateChangePosition + diffAfterLastStateChange;
+
+      return setCurrentTrackPositionUsecase(newTrackPosition);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [isPaused, trackState]);
