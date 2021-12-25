@@ -3,8 +3,23 @@
   top: -4px;
   height: 4px;
   width: 100%;
+  display: grid;
+  grid-template-columns: 12px 1fr 12px;
   background: var(--light-grey);
   cursor: pointer;
+
+  &::before, &::after {
+    content: '';
+    height: 4px;
+  }
+
+  &::before {
+    background-color: var(--base);
+  }
+
+  &::after {
+    background-color: var(--light-grey);
+  }
 }
 
 .currentProgress {
@@ -17,6 +32,7 @@
 
   & :global(.rc-slider-track) {
     background-color: var(--base);
+    border-radius: 0;
   }
 
   & :global(.rc-slider-handle) {
