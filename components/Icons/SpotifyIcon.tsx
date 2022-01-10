@@ -7,7 +7,7 @@ interface SpotifyIconProps {
 
 export const SpotifyIcon: React.FC<SpotifyIconProps> = ({ className, color = '#1ed760' }) => {
   return (
-    <svg width="400px" height="400px" viewBox="0 0 130 130" version="1.1" xmlns="http://www.w3.org/2000/svg" className={className}>
+    <svg width="400px" height="400px" viewBox="0 0 130 130" version="1.1" xmlns="http://www.w3.org/2000/svg" className={className} >
       <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g transform="translate(-153.000000, -252.000000)">
           <g transform="translate(153.000000, 252.000000)">

@@ -122,7 +122,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
           console.log('Device ID has gone offline', device_id);
         });
 
-        player.addListener('player_state_changed', ((state: any) => {
+        player.addListener('player_state_changed', ((state: WebPlaybackState) => {
           // console.log('state', state);
   
           if (!state) {
@@ -131,6 +131,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
 
           setPaused(state.paused);
           setTrackState(state);
+          console.log('sattate', state, state.timestamp);
 
           player.getCurrentState().then((state: any) => {
             (!state) ? setActive(false) : setActive(true);
@@ -164,7 +165,6 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
 
   return (
     <Player
-      isReady={isActive}
       isPlaying={!isPaused}
       setPlay={() => player.togglePlay()}
       setPause={() => player.togglePlay()}

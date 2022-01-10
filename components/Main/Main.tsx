@@ -44,6 +44,7 @@ export const Main: React.FC<MainProps> = observer(({ className }) => {
         key={JSON.stringify(track)}
         imageSrc={track.imageUrl}
         title={track.name}
+        service={track.service}
         subTitle={getArtistNames(track)}
         playTrack={() => setTrackToPlay(track)}
         extra={formatDuration(track.duration)}

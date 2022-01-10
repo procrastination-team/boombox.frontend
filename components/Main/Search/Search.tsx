@@ -34,6 +34,8 @@ export const Search: React.FC<SearchProps> = ({
     if (event.key === 'Enter') {
       searchTrack();
     }
+
+    event.stopPropagation();
   };
 
   return (

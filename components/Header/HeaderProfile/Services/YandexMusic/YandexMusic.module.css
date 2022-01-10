@@ -1,5 +1,7 @@
 .icon {
     cursor: pointer;
+    width: 34px;
+    height: 34px;
 }
 
 .disabled {

@@ -8,7 +8,6 @@ interface YandexMusicPlayerProps {
 export const YandexMusicPlayer: React.FC<YandexMusicPlayerProps> = () => {
   return (
     <Player 
-      isReady={false}
       isPlaying={false}
       setPlay={() => {}}
       setPause={() => {}}

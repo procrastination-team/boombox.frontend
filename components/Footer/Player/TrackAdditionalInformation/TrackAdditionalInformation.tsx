@@ -14,7 +14,7 @@ export const TrackAdditionalInformation: React.FC<TrackAdditionalInformationProp
     return (
       <div className={styles.container}>
         {currentTrack && (
-          <span>
+          <span className={styles.trackPosition}>
             {formatDuration(currentTrack.position)} /{' '}
             {formatDuration(currentTrack.duration)}
           </span>
