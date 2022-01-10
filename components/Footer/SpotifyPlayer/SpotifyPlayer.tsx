@@ -5,6 +5,7 @@ import { spotifyCheckIsAccessTokenValidUsecase } from '../../../usecases/service
 import axios from 'axios';
 import { getAccessTokenByServiceUsecase } from '../../../usecases/getAccessTokenByServiceUsecase';
 import { MusicService } from '../../../store/models';
+import { setCurrentTrackPositionUsecase } from '../../../usecases/setCurrentTrackPositionUsecase';
 
 interface SpotifyPlayerProps {
 
@@ -59,6 +60,8 @@ interface WebPlaybackState {
   },
   paused: boolean;  // Whether the current track is paused.
   position: number;    // The position_ms of the current track.
+  duration: number;
+  timestamp: number;
   repeat_mode: number; // The repeat mode. No repeat mode is 0,
   // repeat context is 1 and repeat track is 2.
   shuffle: false; // True if shuffled, false otherwise.
@@ -77,6 +80,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
   const [player, setPlayer] = useState<any>(undefined);
   const [isPaused, setPaused] = useState(false);
   const [isActive, setActive] = useState(false);
+  const [trackState, setTrackState] = useState<WebPlaybackState>();
 
   const store = useRootStore();
 
@@ -126,6 +130,7 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
           }
 
           setPaused(state.paused);
+          setTrackState(state);
 
           player.getCurrentState().then((state: any) => {
             (!state) ? setActive(false) : setActive(true);
@@ -136,6 +141,26 @@ export const SpotifyPlayer: React.FC<SpotifyPlayerProps> = (props) => {
       };
     }
   }, []);
+
+  useEffect(() => {
+    if (!trackState) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      if (isPaused) {
+        return;
+      }
+
+      const { timestamp, position: lastStateChangePosition } = trackState;
+      const diffAfterLastStateChange = new Date().valueOf() - timestamp;
+      const newTrackPosition = lastStateChangePosition + diffAfterLastStateChange;
+
+      return setCurrentTrackPositionUsecase(newTrackPosition);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isPaused, trackState]);
 
   return (
     <Player
