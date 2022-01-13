@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Spotify.module.css';
 import { SpotifyIcon } from '../../../../Icons/SpotifyIcon';
-import { spotifyAuthorizeUsecase } from '../../../../../usecases/spotifyAuthorizeUsecase';
+import { spotifyAuthorizeUsecase } from '../../../../../usecases/services/spotify/spotifyAuthorizeUsecase';
 import cn from 'classnames';
 
 interface SpotifyProps {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NextElementIcon } from '../../../Icons/NextElementIcon';
 import { PauseIcon } from '../../../Icons/PauseIcon';
 import { PlayIcon } from '../../../Icons/PlayIcon';
@@ -19,6 +19,24 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
   nextTrack,
   previousTrack,
 }) => {
+  useEffect(() => {
+    const keyPressHandler = (event: KeyboardEvent) => {
+      switch (event.code) {
+        case 'Space': {
+          isPlaying ? setPause() : setPlay();
+          event.preventDefault();
+        }; break;
+      }
+    }
+
+    window.addEventListener('keydown', keyPressHandler);
+
+    return () => {
+      window.removeEventListener('keydown', keyPressHandler);
+    }
+  }, [isPlaying, setPause, setPlay]);
+
+
   return (
     <div className={styles.mainControls}>
       <div className={styles.control} onClick={() => previousTrack()}>
@@ -26,9 +44,9 @@ export const PlayerControls: React.FC<PlayerControlsProps> = ({
       </div>
       <div className={styles.control} onClick={() => isPlaying ? setPause() : setPlay()}>
         {isPlaying ? (
-          <PauseIcon className={styles.pauseIcon}/>
+          <PauseIcon className={styles.pauseIcon} />
         ) : (
-          <PlayIcon className={styles.playIcon}/>
+          <PlayIcon className={styles.playIcon} />
         )}
       </div>
       <div className={styles.control} onClick={() => nextTrack()}>

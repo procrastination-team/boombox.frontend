@@ -34,7 +34,7 @@ export const spotifyGetAuthTokenUsecase = async ({
         'Authorization': 'Basic ' + (Buffer.from(clientId + ':' + clientSecret).toString('base64')),
       },
     });
-
+    console.log('Omega ')
     return data;
   } catch {
     return null;

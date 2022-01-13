@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import styles from './Search.module.css';
-import { searchTrackUsecase } from '../../../usecases/searchTrackUsecase';
+import { searchTrackByServiceUsecase } from '../../../usecases/searchTrackByServiceUsecase';
+import { getActiveServicesUsecase } from '../../../usecases/getActiveServicesUsecase';
 
 interface SearchProps {
   setIsLoading: (isLoading: boolean) => void;
@@ -16,7 +17,16 @@ export const Search: React.FC<SearchProps> = ({
 
   const searchTrack = async (): Promise<void> => {
     setIsLoading(true);
-    await searchTrackUsecase(searchString);
+
+    const activeServices = getActiveServicesUsecase();
+
+    const searches = activeServices.map((service) => searchTrackByServiceUsecase({
+      query: searchString,
+      service,
+    }));
+    
+    await Promise.allSettled(searches);
+
     setIsLoading(false);
   };
 
@@ -24,6 +34,8 @@ export const Search: React.FC<SearchProps> = ({
     if (event.key === 'Enter') {
       searchTrack();
     }
+
+    event.stopPropagation();
   };
 
   return (

@@ -5,8 +5,20 @@ import { Header } from '../components/Header/Header';
 import styles from '../styles/Home.module.css';
 import { Main } from '../components/Main/Main';
 import { RootStoreProvider } from '../hooks/useRootStore';
+import { useEffect } from 'react';
 
 const Home: NextPage = () => {
+  useEffect(() => {
+    const resizeHandler = () => { 
+      console.log('resize');
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight / 100}px`);
+    }
+
+    window.addEventListener('resize', resizeHandler);
+
+    return () => window.removeEventListener('resize', resizeHandler);
+  }, []);
+
   return (
     <RootStoreProvider>
       <div className={styles.container}>

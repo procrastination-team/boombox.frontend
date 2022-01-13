@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRootStore } from '../../../hooks/useRootStore';
 import styles from './Player.module.css';
 import { PlayerControls } from './PlayerControls/PlayerControls';
@@ -8,7 +8,6 @@ import { TrackAdditionalInformation } from './TrackAdditionalInformation/TrackAd
 import { TrackMainInformation } from './TrackMainInformation/TrackMainInformation';
 
 interface PlayerProps {
-  isReady?: boolean;
   isPlaying?: boolean;
   setPlay: () => void;
   setPause: () => void;
@@ -18,7 +17,6 @@ interface PlayerProps {
 }
 
 export const Player: React.FC<PlayerProps> = observer(({
-  isReady,
   isPlaying,
   setPlay,
   setPause,

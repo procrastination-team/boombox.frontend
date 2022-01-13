@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import qs from 'qs';
-import { spotifyGetAuthTokenUsecase } from '../../../usecases/spotifyGetAuthTokenUsecase';
+import { spotifyGetAuthTokenUsecase } from '../../../usecases/services/spotify/spotifyGetAuthTokenUsecase';
 import Cookies from 'cookies';
 
 type Data = {

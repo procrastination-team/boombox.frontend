@@ -1,6 +1,6 @@
 import { makeObservable, observable } from "mobx";
 import { RootStore } from "..";
-import { MusicService, Track } from "../../usecases/searchTrackUsecase";
+import { MusicService, Track } from "../models";
 
 export class SpotifyStore {
   root: RootStore;

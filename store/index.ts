@@ -1,11 +1,7 @@
 import { SpotifyStore } from "./SpotifyStore"
 import { YandexMusicStore } from "./YandexMusicStore"
 import { makeObservable, observable, action } from "mobx";
-import { MusicService, MusicServiceUnion, Track } from "../usecases/searchTrackUsecase";
-
-export interface CurrentTrack extends Track<MusicServiceUnion> {
-  position: number;
-}
+import { CurrentTrack } from "./models";
 
 /**
  * Root store pattern
@@ -30,8 +26,9 @@ export class RootStore {
 
   getAllTracks() {
     const spotifyTracks = this.spotifyStore.tracks;
+    const yandexMusicTracks = this.yandexMusicStore.tracks;
 
-    return [...spotifyTracks];
+    return [...spotifyTracks, ...yandexMusicTracks];
   }
 
   setCurrentTrack(track: CurrentTrack) {
