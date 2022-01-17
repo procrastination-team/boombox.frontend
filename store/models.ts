@@ -15,10 +15,6 @@ export interface Track<Service> {
   name: string;
   artists: Artist[];
   imageUrl: string;
-
-  /**
-   * Duration in milliseconds
-   */
   duration: number;
 }
 

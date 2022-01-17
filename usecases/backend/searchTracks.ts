@@ -28,7 +28,7 @@ export const backendSearchTracks = async ({
   service,
   query,
 }: BackendSearchTracksParams): Promise<BackendTrackModel[] | null> => {
-  const response = await axios.get(`${apiUrl}/api/v1/${service}/search?q=${query}`, {
+  const response = await axios.get(`${apiUrl}/api/v1/${service}/search/?q=${query}`, {
     headers: {
       Authorization: `Bearer ${getAccessTokenByServiceUsecase(service)}`,
     },

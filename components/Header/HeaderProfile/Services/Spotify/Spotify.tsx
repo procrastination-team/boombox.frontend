@@ -15,7 +15,7 @@ export const Spotify: React.FC<SpotifyProps> = ({
     <>
       <div onClick={() => spotifyAuthorizeUsecase({
         clientId: process.env.SPOTIFY_DEVELOPER_CLIENT_ID,
-        host: window.location.host,
+        origin: window.location.origin,
       })}>
         <SpotifyIcon className={cn(styles.icon, disabled && styles.disabled)} />
       </div>

@@ -12,19 +12,19 @@ interface GetAuthTokenParams {
   code: string;
   clientId?: string;
   clientSecret?: string;
-  host?: string;
+  origin?: string;
 }
 
 export const spotifyGetAuthTokenUsecase = async ({ 
   code,
   clientId,
   clientSecret,
-  host = 'localhost:3000',
+  origin = 'http://localhost:3000',
 }: GetAuthTokenParams): Promise<GetAuthTokenResponse | null> => {
   const params = new URLSearchParams();
 
   params.append('code', String(code));
-  params.append('redirect_uri', `http://${host}/api/spotify/callback`);
+  params.append('redirect_uri', `${origin}/api/spotify/callback`);
   params.append('grant_type', 'authorization_code');
 
   try {
