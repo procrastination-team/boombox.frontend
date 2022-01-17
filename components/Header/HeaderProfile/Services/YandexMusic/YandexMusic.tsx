@@ -14,7 +14,7 @@ export const YandexMusic: React.FC<YandexMusicProps> = ({
   return (
     <div onClick={() => yandexMusicAuthorizeUsecase({
       clientId: process.env.YANDEX_MUSIC_DEVELOPER_CLIENT_ID,
-      host: window.location.host,
+      origin: window.location.origin,
     })}>
       <YandexMusicIcon className={cn(styles.icon, disabled ? styles.disabled : '')} />
     </div>

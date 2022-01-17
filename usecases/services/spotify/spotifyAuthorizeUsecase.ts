@@ -10,12 +10,12 @@ const random = (length = 8) => {
 
 interface AuthParams {
   clientId?: string;
-  host?: string;
+  origin?: string;
 }
 
 export const spotifyAuthorizeUsecase = async ({ 
   clientId,
-  host = 'localhost:3000',
+  origin = 'http://localhost:3000',
 }: AuthParams) => {
   const scope = 'user-read-private user-read-email streaming user-read-playback-state user-modify-playback-state user-library-read user-library-modify';
   const defenseStateLength = 16;
@@ -25,6 +25,6 @@ export const spotifyAuthorizeUsecase = async ({
     client_id: clientId,
     scope: scope,
     state: random(defenseStateLength),
-    redirect_uri: `http://${host}/api/spotify/callback`,
+    redirect_uri: `${origin}/api/spotify/callback`,
   })}`);
 };
